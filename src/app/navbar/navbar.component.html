@@ -1,0 +1,60 @@
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top border-success">
+  <a class="navbar-brand" style="font-size: 25px;color:white" href="#">Project Manager</a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" (click)="isCollapsed = !isCollapsed" data-target="#navbarsExampleDefault"
+    aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+
+    <span class="navbar-toggler-icon"></span>
+
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault" [ngbCollapse]="isCollapsed">
+
+    <ul class="navbar-nav mr-auto">
+
+      <li class="nav-item">
+
+        <a class="nav-link" style="font-size: 18px;color:white" routerLink="user">Add User</a>
+
+      </li>
+
+      <li class="nav-item">
+
+        <a class="nav-link" style="font-size: 18px;color:white" routerLink="project">Add Project</a>
+
+      </li>
+
+      <li class="nav-item">
+
+        <a class="nav-link" style="font-size: 18px;color:white" routerLink="task">Add Task</a>
+
+      </li>
+
+      <li class="nav-item">
+
+        <a class="nav-link" style="font-size: 18px;color:white" routerLink="viewtask">View Task</a>
+
+      </li>
+
+    </ul>
+
+  </div>
+
+</nav>
+
+
+<!-- <div class="container" style="margin-top: 0 !important;"> -->
+<!-- <div class="card border-success mb-3" style="margin-top: -100 !important;">
+  <div class="card-header bg-dark" style="font-size: 25px;color:white">Project Manager</div>
+
+  <div class="card-body">
+    <a  routerLink="user" class="card-link">Add User</a>
+    <a  routerLink="project" class="card-link">Add Project</a>
+    <a  routerLink="task" class="card-link">Add Task</a>
+    <a  routerLink="viewtask" class="card-link">View Task</a>
+  </div>
+
+
+</div> -->
+<!-- </div> -->

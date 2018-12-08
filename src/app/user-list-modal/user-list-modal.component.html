@@ -1,0 +1,65 @@
+<div role="document" class="modal-dialog">
+
+  <div class="modal-content">
+
+    <div class="modal-header">
+
+      <h4 class="modal-title">User List</h4>
+
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+
+        <span aria-hidden="true">&times;</span>
+
+      </button>
+
+    </div>
+
+    <div class="modal-body">
+
+      <div class="col-sm-12">
+        <div class="shadow-lg p-3 mb-5 bg-white rounded">
+          <div class="form-group mb-2">
+            <input type="text" [(ngModel)]="fstName" name="fName" #fName="ngModel" class="form-control" (keyup)="SearchByName()" placeholder="Search..">
+            <!-- <input class="form-control m-1" type="text" #search (keyup)="filterCatalogues()"> -->
+          </div>
+          <table class="table table-striped">
+              <thead>  
+                  <tr>  
+                     <th>User ID</th>
+                     <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>Employee Id</th>
+                      <th> </th>
+                  </tr>  
+              </thead>  
+    
+            <tbody *ngFor="let objuser of userlist;let i = index">
+    
+                <tr>
+                   <td scope="row" style="display: none;">{{ i + 1 }}</td>
+                    <td>{{objuser.UserID}}</td>
+                    <td>{{objuser.FirstName}}</td>
+                    <td>{{objuser.LastName}}</td>
+                    <td>{{objuser.EmployeeId}}</td>
+                    
+                  <td>  
+                  <button type="button" class="btn btn-info" (click)="onSelect(i)">Select&nbsp;&nbsp;</button>
+                </td>
+             
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="modal-footer">
+
+      <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+
+    </div>
+
+  </div>
+
+</div>

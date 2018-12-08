@@ -1,0 +1,211 @@
+<div class="container">
+  <div class="card border-success mb-3">
+    <div class="card-header bg-info" style="font-size: 20px;color:white">Add Project</div>
+    <div class="card-body">
+      <div class="shadow-lg p-3 mb-5 bg-white rounded">
+        <div class="col-sm-13 col-sm-offset-12">
+          <form class="form-horizontal" name="form" (ngSubmit)="f.form.valid && onSave();" #f="ngForm" novalidate>
+
+            <fieldset>
+              <!-- <legend>Add Project</legend> -->
+
+              <div class="invisible">
+                <input class="form-control" type="text" [(ngModel)]="regProject.ProjectID" name="projectid">
+              </div>
+
+
+              <div class="form-group row">
+                <label for="projectName-input" class="col-2 control-label">
+                  <b>Project :</b>
+                </label>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control" minlength="3" name="projectName" [(ngModel)]="regProject.ProjectName" #projectName="ngModel"
+                    [ngClass]="{ 'is-invalid': f.submitted && projectName.invalid }" required />
+                  <div *ngIf="f.submitted && projectName.invalid" class="invalid-feedback">
+                    <div *ngIf="projectName.errors.required">Project Name is required</div>
+                    <div *ngIf="projectName.errors?.minlength"> Project Name must be at least 3 characters long.</div>
+                  </div>
+                </div>
+
+
+              </div>
+
+              <div class="form-group row">
+
+                <label for="date-input" class="col-2 control-label">
+                  <b></b>
+                </label>
+
+                <div class="col-sm-7">
+                  <div class="form-inline">
+                    <input type="checkbox" class="form-check-input" name="isdate" [(ngModel)]="isDate" (change)="OnEnableDate()" style="width: 3%"
+                    />
+                    <span style="font-size: 15px">Set Start and End Date </span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="date" class="form-control"  name="startDate" [(ngModel)]="regProject.StartDate" #startDate="ngModel"
+                      style="width:120px" [disabled]="enabledate"> &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="date" class="form-control"  name="endDate" [(ngModel)]="regProject.EndDate" #endDate="ngModel"
+                      style="width:120px" [disabled]="enabledate" (blur)="compareTwoDates()">
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="form-group row">
+                <label for="priority-input" class="col-sm-2 control-label">
+                  <b>Priority :</b>
+                </label>
+
+                <div class="col-sm-6">
+                  <div class="form-inline">
+                    <input type="range" class="form-control" name="priority" [(ngModel)]="regProject.Priority" #priority="ngModel" max=30 min=1
+                      value="1" class="Slider" (oninput)="showVal()" (change)="showVal()">
+                    <input class="form-control" style="width:11%" type="text" [(ngModel)]="regProject.PriorityVal" name="priorityval" #priorityval="ngModel"
+                      disabled />
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="form-group row">
+
+                <label for="manager-input" class="col-sm-2 control-label">
+                  <b>Manager :</b>
+                </label>
+
+                <div class="col-sm-6">
+                  <div class="form-inline">
+
+                    <input type="text" class="form-control" style="width: 78%" name="managername" [(ngModel)]="regProject.ManagerName" #managername="ngModel"
+                      [ngClass]="{ 'is-invalid': f.submitted && managername.invalid }" required readonly /> &nbsp;&nbsp;
+                    <button type="button" class="btn btn-secondary" style="width: 20%" (click)="OpenUserModal()">Search</button>
+
+                    <div *ngIf="f.submitted && managername.invalid" class="invalid-feedback">
+                      <div *ngIf="managername.errors.required">Select Project Manager...</div>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="invisible">
+                <input class="form-control" type="text" [(ngModel)]="regProject.ManagerID" name="userId" #userId="ngModel" />
+
+              </div>
+
+              <ng-container *ngIf="show">
+                <div class="col-sm-7">
+                  <div class="alert alert-success">
+                    <b>{{ sMessage }} </b>
+                  </div>
+                </div>
+              </ng-container>
+
+              <ng-container *ngIf="showerror">
+                <div class="col-sm-7">
+                  <div class="alert alert-danger">
+                    <b>{{ eMessage }} </b>
+                  </div>
+                </div>
+              </ng-container>
+
+              <div class="form-group row">
+
+                <div class="col-sm-8 text-right">
+
+                  <button type="submit" class="btn btn-success">{{submitType}}</button>
+                  &nbsp;&nbsp;
+                  <button type="button" class="btn btn-primary" (click)="onCancel()">Reset</button>
+                </div>
+
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+
+
+
+      <div class="shadow-lg p-3 mb-5 bg-white rounded">
+        <div class="col-sm-13 col-sm-offset-12">
+
+          <form class="form-inline">
+            <div class="form-group mb-2">
+              <input type="text" [(ngModel)]="prjName" name="prName" #prName="ngModel" class="form-control" (keyup)="SearchByName()" placeholder="Search..">
+              <!-- <input class="form-control m-1" type="text" #search (keyup)="filterCatalogues()"> -->
+            </div>
+            <div class="form-group mx-sm-3 mb-2">
+              <label for="concept" class="col-xs-2 control-label">Sort:</label>
+            </div>
+
+            <div class="form-group mx-sm-3 mb-2">
+              <button type="button" class="btn btn-secondary" (click)="sortByStartDate()">Start Date</button>
+            </div>
+
+            <div class="form-group mx-sm-3 mb-2">
+              <button type="button" class="btn btn-secondary" (click)="sortByEndDate()">End Date</button>
+            </div>
+
+            <div class="form-group mx-sm-3 mb-2">
+              <button type="button" class="btn btn-secondary" (click)="sortByPriority()">Priority</button>
+            </div>
+
+            <div class="form-group mx-sm-3 mb-2">
+              <button type="button" class="btn btn-secondary" (click)="sortByCompleted()">Completed</button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+
+      <div class="shadow-lg p-3 mb-5 bg-white rounded">
+        <div class="col-sm-10 col-sm-offset-12">
+
+          <table class="table table-striped">
+            <tbody *ngFor="let project of projectlist | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+              <!-- <tr *ngFor="let user of userlist;  let i = index"> -->
+              <tr>
+                <th scope="row" style="display: none;">{{ i + 1 }}</th>
+                <td>
+                  <ul class="list-group">
+                    <li class="list-group-item list-group-item-light">
+                      <span>Project : </span>
+                      <span class="badge badge-pill badge-dark"> {{project.ProjectName}} </span>
+                    </li>
+                    <li class="list-group-item list-group-item-secondary">
+                      <span>No Of Tasks : </span>
+                      <span class="badge badge-pill badge-dark">{{GetAallTasks(project.ProjectID)}}</span> &nbsp;&nbsp;
+                      <span>Completed : </span>
+                      <span class="badge badge-pill badge-dark">{{GetCompletedTasks(project.ProjectID)}}</span>
+                    </li>
+                    <li class="list-group-item list-group-item-dark">
+                      <span>Start Date : </span>
+                      <span class="badge badge-pill badge-dark">{{project.StartDate |date:'MM/dd/yy'}} </span>&nbsp;&nbsp;
+                      <span>End Date : </span>
+                      <span class="badge badge-pill badge-dark">{{project.EndDate |date:'MM/dd/yy'}} </span>
+                    </li>
+                  </ul>
+                </td>
+                <td>
+                  <span>Priority : </span>
+                  <span class="badge badge-pill badge-dark">{{project.Priority}} </span>
+                </td>
+                <td>
+
+                  <button type="button" class="btn btn-info" (click)='onEdit(project.ProjectID)' [disabled]="project.Suspended">Update&nbsp;&nbsp;</button>
+                  <br>
+                  <br>
+                  <button type="button" class="btn btn-danger" (click)='onSuspend(project.ProjectID)' [disabled]="project.Suspended">Suspend</button>
+                </td>
+
+              </tr>
+            </tbody>
+            <pagination-controls (pageChange)="p = $event" responsive="true" previousLabel="Pre" nextLabel="Next"></pagination-controls>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

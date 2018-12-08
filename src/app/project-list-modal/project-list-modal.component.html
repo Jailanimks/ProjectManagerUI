@@ -1,0 +1,59 @@
+<div role="document" class="modal-dialog">
+
+  <div class="modal-content">
+
+    <div class="modal-header">
+
+      <h4 class="modal-title">Project List</h4>
+
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+
+        <span aria-hidden="true">&times;</span>
+
+      </button>
+
+    </div>
+
+    <div class="modal-body">
+
+      <div class="col-sm-16">
+        <div class="shadow-lg p-3 mb-5 bg-white rounded">
+          <div class="form-group mb-2">
+            <input type="text" [(ngModel)]="prjName" name="pName" #pName="ngModel" class="form-control" (keyup)="SearchByName()" placeholder="Search..">
+          </div>
+          <table class="table table-striped">
+              <thead>  
+                  <tr>  
+                     <th>Project ID</th>
+                     <th>Project Name</th>
+                     <th>Manager</th>
+                      <th> </th>
+                  </tr>  
+              </thead>  
+    
+            <tbody *ngFor="let objproject of projectlist;let i = index">
+    
+                <tr>
+                   <td scope="row" style="display: none;">{{ i + 1 }}</td>
+                    <td>{{objproject.ProjectID}}</td>
+                    <td>{{objproject.ProjectName}}</td>
+                    <td>{{GetUser(objproject.ManagerID)}}</td>
+                    
+                  <td>  
+                  <button type="button" class="btn btn-info" (click)="onSelect(i)">Select&nbsp;&nbsp;</button>
+                </td>
+             
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+    </div>
+  </div>
+
+</div>

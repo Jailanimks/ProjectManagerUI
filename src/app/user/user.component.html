@@ -1,0 +1,162 @@
+<div class="container">
+    <div class="card border-success mb-3">
+        <div class="card-header bg-info" style="font-size: 20px;color:white">Add User</div>
+    <div class="card-body">
+   <div class="shadow-lg p-3 mb-5 bg-white rounded">
+    <div class="col-sm-13 col-sm-offset-12">
+      <form class="form-horizontal" name="form" (ngSubmit)="f.form.valid && onSave();" #f="ngForm" novalidate>
+       
+        <fieldset>
+        
+          <!-- <legend>Add User</legend> -->
+
+          <div class="invisible">
+            <input class="form-control" type="text" [(ngModel)]="regUser.UserID" name="userId">
+          </div>
+          <div class="form-group row">
+            <label class="col-2 col-form-label" for="firstname-input">
+              <b>First Name :</b>
+            </label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" minlength="3" name="firstName" [(ngModel)]="regUser.FirstName" #firstName="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && firstName.invalid }" required />
+              <div *ngIf="f.submitted && firstName.invalid" class="invalid-feedback">
+                <div *ngIf="firstName.errors.required">First Name is required</div>
+                <div *ngIf="firstName.errors?.minlength"> First Name must be at least 3 characters long.</div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="form-group row">
+            <label class="col-2 col-form-label" for="lastname-input">
+              <b>Last Name :</b>
+            </label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" name="lastName" [(ngModel)]="regUser.LastName" #lastName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && lastName.invalid }"
+                required />
+              <div *ngIf="f.submitted && lastName.invalid" class="invalid-feedback">
+                <div *ngIf="lastName.errors.required">Last Name is required</div>
+              </div>
+
+            </div>
+          </div>
+
+
+          <div class="form-group row">
+            <label class="col-2 col-form-label" for="empid-input">
+              <b>Employee ID :</b>
+            </label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" name="employeeId" [(ngModel)]="regUser.EmployeeId" #employeeId="ngModel" [ngClass]="{ 'is-invalid': f.submitted && employeeId.invalid }"
+                required />
+              <div *ngIf="f.submitted && employeeId.invalid" class="invalid-feedback">
+                <div *ngIf="employeeId.errors.required">Employee ID is required</div>
+              </div>
+
+            </div>
+          </div>
+
+          <ng-container *ngIf="show">
+            <div class="col-sm-7">
+              <div class="alert alert-success">
+                <b>{{ sMessage }} </b>
+              </div>
+            </div>
+          </ng-container>
+
+        
+  
+
+          <div class="form-group row">
+            <div class="col-sm-8 text-right">
+              <button type="submit" class="btn btn-success">{{submitType}}</button>&nbsp;&nbsp;&nbsp;&nbsp;
+              <button type="button" class="btn btn-primary" (click)="onCancel()">Reset</button>
+            </div>
+
+          </div>
+
+        </fieldset>
+      </form>
+    </div>
+  </div>
+
+
+
+  <div class="shadow-lg p-3 mb-5 bg-white rounded">
+    <div class="col-sm-13 col-sm-offset-12">
+
+        <ng-container *ngIf="showerror">
+            <div class="col-sm-8">
+              <div class="alert alert-danger">
+                <b>{{ eMessage }} </b>
+              </div>
+            </div>
+          </ng-container>
+
+      <form class="form-inline">
+        <div class="form-group mb-2">
+          <input type="text" [(ngModel)]="fstName" name="fName" #fName="ngModel" class="form-control" (keyup)="SearchByName()" placeholder="Search..">
+          <!-- <input class="form-control m-1" type="text" #search (keyup)="filterCatalogues()"> -->
+        </div>
+        <div class="form-group mx-sm-3 mb-2">
+          <label for="concept" class="col-xs-2 control-label">Sort:</label>
+        </div>
+
+        <div class="form-group mx-sm-3 mb-2">
+          <button type="button" class="btn btn-secondary" (click)="sortByFirstName()">First Name</button>
+        </div>
+
+        <div class="form-group mx-sm-3 mb-2">
+          <button type="button" class="btn btn-secondary" (click)="sortByLastName()">Last Name</button>
+        </div>
+
+        <div class="form-group mx-sm-3 mb-2">
+          <button type="button" class="btn btn-secondary" (click)="sortByEmpid()">Emp.Id</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+
+  <div class="shadow-lg p-3 mb-5 bg-white rounded">
+    <div class="col-sm-10 col-sm-offset-12">
+
+      <table class="table table-striped">
+        <tbody *ngFor="let user of userlist | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+          <tr>
+            <th scope="row" style="display: none;">{{ i + 1 }}</th>
+            <td>
+              <ul class="list-group">
+                <li class="list-group-item list-group-item-light">
+                  <span>First Name: </span>
+                  <span class="badge badge-pill badge-dark"> {{user.FirstName}} </span>
+                </li>
+                <li class="list-group-item list-group-item-secondary">
+                  <span>Last Name: </span>
+                  <span class="badge badge-pill badge-dark">{{user.LastName}} </span>
+                </li>
+                <li class="list-group-item list-group-item-dark">
+                  <span>Employee Id: </span>
+                  <span class="badge badge-pill badge-dark">{{user.EmployeeId}} </span>
+                </li>
+              </ul>
+            </td>
+            <td>
+
+              <button type="button" class="btn btn-info" (click)='onEdit(user.UserID)'>Edit&nbsp;&nbsp;&nbsp;&nbsp;</button>
+              <br>
+              <br>
+              <button type="button" class="btn btn-danger" (click)='onDelete(user.UserID)'>Delete</button>
+            </td>
+
+          </tr>
+        </tbody>
+        <pagination-controls (pageChange)="p = $event" responsive="true" previousLabel="Pre" nextLabel="Next"></pagination-controls>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+</div>

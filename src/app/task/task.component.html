@@ -1,0 +1,192 @@
+<div class="container">
+
+    <div class="card border-success mb-3">
+        <div class="card-header bg-info" style="font-size: 20px;color:white">Add Task</div>
+        <div class="card-body">
+
+  <div class="shadow-lg p-3 mb-5 bg-white rounded">
+    <div class="col-sm-13 col-sm-offset-12">
+      <form class="form-horizontal" name="form" (ngSubmit)="onSave();" #f="ngForm" novalidate>
+
+        <fieldset>
+          <!-- <legend>Add Task</legend> -->
+
+          <div class="invisible">
+            <input class="form-control" type="text" [(ngModel)]="regTask.TaskId" name="taskid">
+          </div>
+
+
+          <div class="form-group row">
+
+            <label for="project-input" class="col-sm-2 control-label">
+              <b>Project :</b>
+            </label>
+
+            <div class="col-sm-6">
+              <div class="form-inline">
+
+                <input type="text" class="form-control" style="width: 77%" name="projectname" [(ngModel)]="regTask.ProjectName" #projectname="ngModel"
+                  [ngClass]="{ 'is-invalid': f.submitted && projectname.invalid }" required readonly /> &nbsp;&nbsp;
+                <button style="width:20%" type="button" class="btn btn-secondary" (click)="OpenProjectModal()">Search</button>
+                <div *ngIf="f.submitted && projectname.invalid" class="invalid-feedback">
+                  <div *ngIf="projectname.errors.required">Select Project...</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="form-group row">
+            <label for="taskname-input" class="col-2 control-label">
+              <b>Task :</b>
+            </label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" minlength="3" name="taskName" [(ngModel)]="regTask.TaskName" #taskName="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && taskName.invalid }" required />
+              <div *ngIf="f.submitted && taskName.invalid" class="invalid-feedback">
+                <div *ngIf="taskName.errors.required">Task Name is required</div>
+                <div *ngIf="taskName.errors?.minlength"> Task Name must be at least 3 characters long.</div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="form-group row">
+
+            <label for="ptask-input" class="col-2 control-label">
+              <b></b>
+            </label>
+
+            <div class="col-sm-9">
+              <div class="form-inline">
+                <input type="checkbox" class="form-check-input" name="isParentTask" [(ngModel)]="isParentTask" (change)="OnEnableControl()"
+                />
+                <span>Parent Task </span>
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="form-group row">
+            <label for="priority-input" class="col-sm-2 control-label">
+              <b>Priority :</b>
+            </label>
+
+            <div class="col-sm-6">
+              <div class="form-inline">
+                <input type="range" name="priority" [(ngModel)]="regTask.Priority" #priority="ngModel" max=30 min=0
+                  value="0" class="Slider" (oninput)="showVal()" (change)="showVal()" [disabled]="enablecontrol">
+                <input class="form-control" style="width:11%" type="text" [(ngModel)]="regTask.PriorityVal" name="priorityval" #priorityval="ngModel"
+                disabled />
+
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="form-group row">
+
+            <label for="ptask-input" class="col-sm-2 control-label">
+              <b>Parent Task :</b>
+            </label>
+
+            <div class="col-sm-6">
+              <div class="form-inline">
+
+                <input type="text" class="form-control" style="width: 77%" name="parenttaskname" [(ngModel)]="regTask.ParentTaskName" #parenttaskname="ngModel"
+                  readonly /> &nbsp;&nbsp;
+                <button style="width:20%" ype="button" class="btn btn-secondary" (click)="OpenParentTaskModal()" [disabled]="enablecontrol">Search</button>
+
+              </div>
+            </div>
+          </div>
+
+
+          <div class="form-group row">
+
+            <label for="date-input" class="col-2 control-label">
+              <b>Start Date : </b>
+            </label>
+
+            <div class="col-sm-9">
+              <div class="form-inline">
+                <input type="date" class="form-control" name="startDate" [(ngModel)]="regTask.StartDate" #startDate="ngModel" style="width:120px"
+                [disabled]="enablecontrol"> &nbsp;&nbsp;
+                <span>
+                  <b>End Date : </b>
+                </span>
+                &nbsp;&nbsp;
+                <input type="date" class="form-control" name="endDate" [(ngModel)]="regTask.EndDate" #endDate="ngModel" style="width:120px"
+                [disabled]="enablecontrol">
+              </div>
+            </div>
+
+          </div>
+
+
+
+          <div class="form-group row">
+
+            <label for="user-input" class="col-sm-2 control-label">
+              <b>User :</b>
+            </label>
+
+            <div class="col-sm-6">
+              <div class="form-inline">
+
+                <input type="text" class="form-control" style="width: 77%" name="username" [(ngModel)]="regTask.UserName" #username="ngModel"
+                  [ngClass]="{ 'is-invalid': f.submitted && username.invalid && !enablecontrol}" required readonly /> &nbsp;&nbsp;
+                <button type="button" style="width:20%" class="btn btn-secondary" (click)="OpenUserModal()" [disabled]="enablecontrol">Search</button>
+
+                <div *ngIf="f.submitted && username.invalid && !enablecontrol" class="invalid-feedback">
+                  <div *ngIf="username.errors.required">Select Task Owner...</div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+          <ng-container *ngIf="show">
+            <div class="col-sm-7">
+              <div class="alert alert-success">
+                <b>{{ sMessage }} </b>
+              </div>
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="showerror">
+            <div class="col-sm-7">
+              <div class="alert alert-danger">
+                <b>{{ eMessage }} </b>
+              </div>
+            </div>
+          </ng-container>
+
+          <div class="form-group row">
+
+            <div class="col-sm-8 text-right">
+
+              <button type="submit" class="btn btn-success">Save</button>
+              &nbsp;&nbsp;
+              <button type="button" class="btn btn-primary" (click)="onCancel()">Reset</button>
+            </div>
+
+          </div>
+
+          <div class="invisible">
+            <input class="form-control" type="text" [(ngModel)]="regTask.ProjectID" name="projectId" #projectId="ngModel" />
+            <input class="form-control" type="text" [(ngModel)]="regTask.UserID" name="userId" #userId="ngModel" />
+            <input class="form-control" type="text" [(ngModel)]="regTask.ParentTaskId" name="ptaskId" #ptaskId="ngModel" />
+          </div>
+
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+</div>
