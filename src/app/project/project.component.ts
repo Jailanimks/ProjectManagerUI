@@ -26,6 +26,7 @@ export class ProjectComponent implements OnInit {
   public empidSortasc: boolean = false;
   public compSortasc: boolean = false;
   ManagerName: string;
+  public p:number;
 
   projectlist: Projects[];
   userlist: Users[];

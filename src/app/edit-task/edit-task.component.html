@@ -1,10 +1,13 @@
 <div class="container">
+  <div class="card border-success mb-3">
+      <div class="card-header bg-info" style="font-size: 16px;color:white">Update Task</div>
+  <div class="card-body">
   <div class="shadow-lg p-3 mb-5 bg-white rounded">
     <div class="col-sm-13 col-sm-offset-12">
       <form class="form-horizontal" name="form" (ngSubmit)="f.form.valid && onSave();" #f="ngForm" novalidate>
 
         <fieldset>
-          <legend>Update Task</legend>
+          <!-- <legend>Update Task</legend> -->
 
           <div class="invisible">
             <input class="form-control" type="text" [(ngModel)]="regTask.TaskId" name="taskid">
@@ -22,7 +25,7 @@
 
                 <input type="text" class="form-control" style="width: 77%" name="projectname" [(ngModel)]="regTask.ProjectName" #projectname="ngModel"
                  readonly /> &nbsp;&nbsp;
-                <button style="width:20%" type="button" class="btn btn-secondary" disabled>Search</button>
+                <button style="width:20%" type="button" class="btn btn-secondary btn-sm" disabled>Search</button>
               </div>
             </div>
           </div>
@@ -52,7 +55,7 @@
 
             <div class="col-sm-9">
               <div class="form-inline">
-                <input type="checkbox" class="form-check-input" name="isParentTask" [(ngModel)]="isParentTask"  (change)="OnEnableControl()"
+                <input type="checkbox" class="form-check-input" name="isParentTask" [(ngModel)]="isParentTask" 
                 disabled />
                 <span>Parent Task </span>
               </div>
@@ -90,7 +93,7 @@
 
                 <input type="text" class="form-control" style="width: 77%" name="parenttaskname" [(ngModel)]="regTask.ParentTaskName" #parenttaskname="ngModel"
                  readonly /> &nbsp;&nbsp;
-                <button style="width:20%" ype="button" class="btn btn-secondary" disabled>Search</button>
+                <button style="width:20%" ype="button" class="btn btn-secondary btn-sm" disabled>Search</button>
 
               </div>
             </div>
@@ -131,7 +134,7 @@
 
                 <input type="text" class="form-control" style="width: 77%" name="username" [(ngModel)]="regTask.UserName" #username="ngModel"
                   [ngClass]="{ 'is-invalid': f.submitted && username.invalid && !enablecontrol}" required readonly /> &nbsp;&nbsp;
-                <button type="button" style="width:20%" class="btn btn-secondary" (click)="OpenUserModal()" [disabled]="enablecontrol">Search</button>
+                <button type="button" style="width:20%" class="btn btn-secondary btn-sm" (click)="OpenUserModal()" [disabled]="enablecontrol">Search</button>
 
                 <div *ngIf="f.submitted && username.invalid && !enablecontrol" class="invalid-feedback">
                   <div *ngIf="username.errors.required">Select Task Owner...</div>
@@ -170,9 +173,9 @@
 
             <div class="col-sm-8 text-right">
 
-              <button type="submit" class="btn btn-success">Update</button>
+              <button type="submit" class="btn btn-success btn-sm">Update</button>
               &nbsp;&nbsp;
-              <button type="button" class="btn btn-primary" (click)="onCancel()">Cancel</button>
+              <button type="button" class="btn btn-primary btn-sm" (click)="onCancel()">Cancel</button>
             </div>
 
           </div>
@@ -181,4 +184,6 @@
       </form>
     </div>
   </div>
+</div>
+</div>
 </div>

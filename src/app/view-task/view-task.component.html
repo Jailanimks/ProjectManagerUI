@@ -1,11 +1,11 @@
 <div class="container">
 
     <div class="card border-success mb-3">
-        <div class="card-header bg-info" style="font-size: 20px;color:white">View Task</div>
+        <div class="card-header bg-info" style="font-size: 16px;color:white">View Task</div>
         <div class="card-body">
 
   <div class="shadow-lg p-3 mb-5 bg-white rounded">
-    <div class="col-sm-13 col-sm-offset-12">
+    <div class="col-sm-14 col-sm-offset-12">
     
         <fieldset>
             <!-- <legend>View Task</legend> -->
@@ -16,26 +16,26 @@
         <div class="form-group mb-2">
           <input type="text" [(ngModel)]="projName" name="prName" #prName="ngModel" class="form-control" placeholder="Search.." readonly>
           &nbsp;&nbsp;
-          <button type="button" class="btn btn-secondary" (click)="Reload();OpenProjectModal()">Search</button>
+          <button type="button" class="btn btn-secondary btn-sm" (click)="Reload();OpenProjectModal()">Search</button>
         </div>
-        <div class="form-group mx-sm-3 mb-2">
+        <div class="form-group mx-sm-2 mb-2">
           <label for="concept" class="col-xs-2 control-label">Sort Task By:</label>
         </div>
 
         <div class="form-group mx-sm-3 mb-2">
-          <button type="button" class="btn btn-secondary" (click)="sortByStartDate()">Start Date</button>
+          <button type="button" class="btn btn-secondary btn-sm" (click)="sortByStartDate()">Start Date</button>
         </div>
 
         <div class="form-group mx-sm-3 mb-2">
-          <button type="button" class="btn btn-secondary" (click)="sortByEndDate()">End Date</button>
+          <button type="button" class="btn btn-secondary btn-sm" (click)="sortByEndDate()">End Date</button>
         </div>
 
         <div class="form-group mx-sm-3 mb-2">
-          <button type="button" class="btn btn-secondary" (click)="sortByPriority()">Priority</button>
+          <button type="button" class="btn btn-secondary btn-sm" (click)="sortByPriority()">Priority</button>
         </div>
 
         <div class="form-group mx-sm-3 mb-2">
-          <button type="button" class="btn btn-secondary" (click)="sortByCompleted()">Completed</button>
+          <button type="button" class="btn btn-secondary btn-sm" (click)="sortByCompleted()">Completed</button>
         </div>
        
       </form>
@@ -77,10 +77,10 @@
                 <td>{{GetUser(objtask.UserID)}}</td>
       
             <td>
-              <button type="button" class="btn btn-info" (click)='onEdit(objtask.TaskId)' [disabled]="objtask.Status">Edit&nbsp;&nbsp;&nbsp;&nbsp;</button>
+              <button type="button" class="btn btn-info btn-sm" (click)='onEdit(objtask.TaskId)' [disabled]="objtask.Status">Edit&nbsp;&nbsp;&nbsp;&nbsp;</button>
             </td>
             <td>
-              <button type="button" class="btn btn-danger" (click)='onEndTask(objtask.TaskId)' [disabled]="objtask.Status">End Task</button>
+              <button type="button" class="btn btn-danger btn-sm" (click)='onEndTask(objtask.TaskId)' [disabled]="objtask.Status">End Task</button>
             </td>
 
           </tr>

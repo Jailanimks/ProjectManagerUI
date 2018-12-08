@@ -32,7 +32,8 @@ export class ViewTaskComponent implements OnInit {
   public enddtSortasc:boolean = false;
   public prioritySortasc:boolean = false;
   public compSortasc:boolean = false;
-
+  public p:number;
+  
   constructor(private _service: SharedService, private router: Router, private modal: NgbModal) { 
     this.GetAllTasksList();
     this.GetAllUsersList();

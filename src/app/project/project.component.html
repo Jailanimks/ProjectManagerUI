@@ -1,6 +1,6 @@
 <div class="container">
   <div class="card border-success mb-3">
-    <div class="card-header bg-info" style="font-size: 20px;color:white">Add Project</div>
+    <div class="card-header bg-info" style="font-size: 16px;color:white">Add Project</div>
     <div class="card-body">
       <div class="shadow-lg p-3 mb-5 bg-white rounded">
         <div class="col-sm-13 col-sm-offset-12">
@@ -40,12 +40,12 @@
                   <div class="form-inline">
                     <input type="checkbox" class="form-check-input" name="isdate" [(ngModel)]="isDate" (change)="OnEnableDate()" style="width: 3%"
                     />
-                    <span style="font-size: 15px">Set Start and End Date </span>
+                    <span style="font-size: 13px">Set Start and End Date </span>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <input type="date" class="form-control"  name="startDate" [(ngModel)]="regProject.StartDate" #startDate="ngModel"
-                      style="width:120px" [disabled]="enabledate"> &nbsp;&nbsp;&nbsp;&nbsp;
+                      style="width:110px" [disabled]="enabledate"> &nbsp;&nbsp;&nbsp;&nbsp;
                     <input type="date" class="form-control"  name="endDate" [(ngModel)]="regProject.EndDate" #endDate="ngModel"
-                      style="width:120px" [disabled]="enabledate" (blur)="compareTwoDates()">
+                      style="width:110px" [disabled]="enabledate" (blur)="compareTwoDates()">
                   </div>
                 </div>
 
@@ -76,9 +76,9 @@
                 <div class="col-sm-6">
                   <div class="form-inline">
 
-                    <input type="text" class="form-control" style="width: 78%" name="managername" [(ngModel)]="regProject.ManagerName" #managername="ngModel"
+                    <input type="text" class="form-control" style="width: 75%" name="managername" [(ngModel)]="regProject.ManagerName" #managername="ngModel"
                       [ngClass]="{ 'is-invalid': f.submitted && managername.invalid }" required readonly /> &nbsp;&nbsp;
-                    <button type="button" class="btn btn-secondary" style="width: 20%" (click)="OpenUserModal()">Search</button>
+                    <button type="button" class="btn btn-secondary btn-sm" style="width: 20%" (click)="OpenUserModal()">Search</button>
 
                     <div *ngIf="f.submitted && managername.invalid" class="invalid-feedback">
                       <div *ngIf="managername.errors.required">Select Project Manager...</div>
@@ -114,9 +114,9 @@
 
                 <div class="col-sm-8 text-right">
 
-                  <button type="submit" class="btn btn-success">{{submitType}}</button>
+                  <button type="submit" class="btn btn-success btn-sm">{{submitType}}</button>
                   &nbsp;&nbsp;
-                  <button type="button" class="btn btn-primary" (click)="onCancel()">Reset</button>
+                  <button type="button" class="btn btn-primary btn-sm" (click)="onCancel()">Reset</button>
                 </div>
 
               </div>
@@ -140,19 +140,19 @@
             </div>
 
             <div class="form-group mx-sm-3 mb-2">
-              <button type="button" class="btn btn-secondary" (click)="sortByStartDate()">Start Date</button>
+              <button type="button" class="btn btn-secondary btn-sm" (click)="sortByStartDate()">Start Date</button>
             </div>
 
             <div class="form-group mx-sm-3 mb-2">
-              <button type="button" class="btn btn-secondary" (click)="sortByEndDate()">End Date</button>
+              <button type="button" class="btn btn-secondary btn-sm" (click)="sortByEndDate()">End Date</button>
             </div>
 
             <div class="form-group mx-sm-3 mb-2">
-              <button type="button" class="btn btn-secondary" (click)="sortByPriority()">Priority</button>
+              <button type="button" class="btn btn-secondary btn-sm" (click)="sortByPriority()">Priority</button>
             </div>
 
             <div class="form-group mx-sm-3 mb-2">
-              <button type="button" class="btn btn-secondary" (click)="sortByCompleted()">Completed</button>
+              <button type="button" class="btn btn-secondary btn-sm" (click)="sortByCompleted()">Completed</button>
             </div>
 
           </form>
@@ -194,10 +194,10 @@
                 </td>
                 <td>
 
-                  <button type="button" class="btn btn-info" (click)='onEdit(project.ProjectID)' [disabled]="project.Suspended">Update&nbsp;&nbsp;</button>
+                  <button type="button" class="btn btn-info btn-sm" (click)='onEdit(project.ProjectID)' [disabled]="project.Suspended">Update&nbsp;&nbsp;</button>
                   <br>
                   <br>
-                  <button type="button" class="btn btn-danger" (click)='onSuspend(project.ProjectID)' [disabled]="project.Suspended">Suspend</button>
+                  <button type="button" class="btn btn-danger btn-sm" (click)='onSuspend(project.ProjectID)' [disabled]="project.Suspended">Suspend</button>
                 </td>
 
               </tr>

@@ -1,6 +1,6 @@
 <div class="container">
     <div class="card border-success mb-3">
-        <div class="card-header bg-info" style="font-size: 20px;color:white">Add User</div>
+        <div class="card-header bg-info" style="font-size: 16px;color:white">Add User</div>
     <div class="card-body">
    <div class="shadow-lg p-3 mb-5 bg-white rounded">
     <div class="col-sm-13 col-sm-offset-12">
@@ -70,8 +70,8 @@
 
           <div class="form-group row">
             <div class="col-sm-8 text-right">
-              <button type="submit" class="btn btn-success">{{submitType}}</button>&nbsp;&nbsp;&nbsp;&nbsp;
-              <button type="button" class="btn btn-primary" (click)="onCancel()">Reset</button>
+              <button type="submit" class="btn btn-success btn-sm">{{submitType}}</button>&nbsp;&nbsp;&nbsp;&nbsp;
+              <button type="button" class="btn btn-primary btn-sm" (click)="onCancel()">Reset</button>
             </div>
 
           </div>
@@ -104,15 +104,15 @@
         </div>
 
         <div class="form-group mx-sm-3 mb-2">
-          <button type="button" class="btn btn-secondary" (click)="sortByFirstName()">First Name</button>
+          <button type="button" class="btn btn-secondary btn-sm" (click)="sortByFirstName()">First Name</button>
         </div>
 
         <div class="form-group mx-sm-3 mb-2">
-          <button type="button" class="btn btn-secondary" (click)="sortByLastName()">Last Name</button>
+          <button type="button" class="btn btn-secondary btn-sm" (click)="sortByLastName()">Last Name</button>
         </div>
 
         <div class="form-group mx-sm-3 mb-2">
-          <button type="button" class="btn btn-secondary" (click)="sortByEmpid()">Emp.Id</button>
+          <button type="button" class="btn btn-secondary btn-sm" (click)="sortByEmpid()">Emp.Id</button>
         </div>
       </form>
     </div>
@@ -145,10 +145,10 @@
             </td>
             <td>
 
-              <button type="button" class="btn btn-info" (click)='onEdit(user.UserID)'>Edit&nbsp;&nbsp;&nbsp;&nbsp;</button>
+              <button type="button" class="btn btn-info btn-sm" (click)='onEdit(user.UserID)'>Edit&nbsp;&nbsp;&nbsp;&nbsp;</button>
               <br>
               <br>
-              <button type="button" class="btn btn-danger" (click)='onDelete(user.UserID)'>Delete</button>
+              <button type="button" class="btn btn-danger btn-sm" (click)='onDelete(user.UserID)'>Delete</button>
             </td>
 
           </tr>

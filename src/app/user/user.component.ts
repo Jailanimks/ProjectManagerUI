@@ -21,7 +21,8 @@ export class UserComponent implements OnInit {
   public fnameSortasc: boolean = false;
   public lnameSortasc: boolean = false;
   public empidSortasc: boolean = false;
-
+  public p:number;
+  
   userlist: Users[];
   projectlist: Projects[];
   tasklist: Tasks[];
