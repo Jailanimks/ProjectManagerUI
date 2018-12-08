@@ -7,8 +7,7 @@
           <form class="form-horizontal" name="form" (ngSubmit)="f.form.valid && onSave();" #f="ngForm" novalidate>
 
             <fieldset>
-              <!-- <legend>Add Project</legend> -->
-
+             
               <div class="invisible">
                 <input class="form-control" type="text" [(ngModel)]="regProject.ProjectID" name="projectid">
               </div>
@@ -165,7 +164,6 @@
 
           <table class="table table-striped">
             <tbody *ngFor="let project of projectlist | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
-              <!-- <tr *ngFor="let user of userlist;  let i = index"> -->
               <tr>
                 <th scope="row" style="display: none;">{{ i + 1 }}</th>
                 <td>
